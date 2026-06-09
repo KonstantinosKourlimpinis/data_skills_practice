@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Python Terminal Reference</title>
+  <style>
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      max-width: 860px;
+      margin: 40px auto;
+      padding: 0 20px;
+      background: #f9f9f9;
+      color: #222;
+    }
+    h1 { font-size: 1.6rem; border-bottom: 2px solid #333; padding-bottom: 8px; }
+    h2 { font-size: 1.15rem; margin-top: 2rem; color: #444; }
+    p { line-height: 1.6; }
+    code {
+      background: #eee;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: "SF Mono", "Fira Code", monospace;
+      font-size: 0.9em;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+      font-size: 0.95rem;
+    }
+    th {
+      background: #333;
+      color: #fff;
+      text-align: left;
+      padding: 8px 12px;
+    }
+    td {
+      padding: 8px 12px;
+      border-bottom: 1px solid #ddd;
+    }
+    tr:nth-child(even) td { background: #f2f2f2; }
+    .note {
+      background: #fff8e1;
+      border-left: 4px solid #f0b429;
+      padding: 10px 14px;
+      margin-top: 12px;
+      border-radius: 2px;
+      font-size: 0.93rem;
+    }
+    .section { margin-bottom: 2.5rem; }
+  </style>
+</head>
+<body>
+
+<h1>Python &amp; Terminal Quick Reference</h1>
+<p>A cheat sheet for R users learning Python. Covers the terminal commands and concepts you'll actually use.</p>
+
+<!-- ── WHY THE TERMINAL ─────────────────────────────────── -->
+<div class="section">
+  <h2>Why Python uses the terminal</h2>
+  <p>
+    In R, RStudio wraps everything — package installs, environment, file paths.
+    Python has no single dominant IDE, so its setup instructions use the terminal
+    because it works everywhere (VS Code, PyCharm, Jupyter, etc.).
+    Once your environment is set up, you barely touch it — day-to-day work is in notebooks.
+  </p>
+</div>
+
+<!-- ── pip ─────────────────────────────────────────────── -->
+<div class="section">
+  <h2>pip — Python's package manager</h2>
+  <p>Equivalent of <code>install.packages()</code> in R. Downloads packages from PyPI (like CRAN).</p>
+  <table>
+    <tr><th>R</th><th>Python (terminal)</th></tr>
+    <tr><td><code>install.packages("ggplot2")</code></td><td><code>pip install matplotlib</code></td></tr>
+    <tr><td><code>library(ggplot2)</code></td><td><code>import matplotlib</code> (inside code)</td></tr>
+    <tr><td>CRAN</td><td>PyPI (pypi.org)</td></tr>
+  </table>
+  <table style="margin-top:10px">
+    <tr><th>Command</th><th>What it does</th></tr>
+    <tr><td><code>pip install pandas</code></td><td>Install a package</td></tr>
+    <tr><td><code>pip install -r requirements.txt</code></td><td>Install all packages listed in requirements.txt</td></tr>
+    <tr><td><code>pip list</code></td><td>See all installed packages</td></tr>
+    <tr><td><code>pip freeze</code></td><td>List packages with exact versions (useful for sharing)</td></tr>
+  </table>
+</div>
+
+<!-- ── NAVIGATION ─────────────────────────────────────── -->
+<div class="section">
+  <h2>Navigation — moving around folders</h2>
+  <p>The terminal always has a "current location." These commands let you navigate.</p>
+  <table>
+    <tr><th>Command</th><th>What it does</th><th>R equivalent</th></tr>
+    <tr><td><code>pwd</code></td><td>Print current folder path</td><td><code>getwd()</code></td></tr>
+    <tr><td><code>ls</code></td><td>List files in current folder</td><td><code>list.files()</code></td></tr>
+    <tr><td><code>cd foldername</code></td><td>Move into a folder</td><td><code>setwd()</code></td></tr>
+    <tr><td><code>cd ..</code></td><td>Go up one level</td><td>—</td></tr>
+    <tr><td><code>cd ~</code></td><td>Go to your home folder</td><td>—</td></tr>
+  </table>
+</div>
+
+<!-- ── VIRTUAL ENVIRONMENTS ───────────────────────────── -->
+<div class="section">
+  <h2>Virtual environments</h2>
+  <p>
+    In R, packages install globally. In Python, best practice is one isolated environment per project
+    so packages from different projects don't conflict.
+  </p>
+  <table>
+    <tr><th>Command</th><th>What it does</th></tr>
+    <tr><td><code>python -m venv .venv</code></td><td>Create a virtual environment in a folder called <code>.venv</code></td></tr>
+    <tr><td><code>source .venv/bin/activate</code></td><td>Activate it (Mac/Linux) — you'll see <code>(.venv)</code> in your prompt</td></tr>
+    <tr><td><code>.venv\Scripts\activate</code></td><td>Activate it (Windows)</td></tr>
+    <tr><td><code>deactivate</code></td><td>Turn it off, return to system Python</td></tr>
+  </table>
+  <div class="note">
+    Once activated, <code>pip install</code> and <code>python</code> both point to <em>this project's</em> environment, not your system Python.
+  </div>
+</div>
+
+<!-- ── RUNNING PYTHON ─────────────────────────────────── -->
+<div class="section">
+  <h2>Running Python</h2>
+  <table>
+    <tr><th>Command</th><th>What it does</th></tr>
+    <tr><td><code>python script.py</code></td><td>Run a Python file</td></tr>
+    <tr><td><code>python --version</code></td><td>Check which Python version is active</td></tr>
+    <tr><td><code>jupyter notebook</code></td><td>Open Jupyter Notebooks in your browser</td></tr>
+    <tr><td><code>jupyter lab</code></td><td>Open JupyterLab (newer UI)</td></tr>
+  </table>
+</div>
+
+<!-- ── FILE MANAGEMENT ────────────────────────────────── -->
+<div class="section">
+  <h2>General file commands</h2>
+  <table>
+    <tr><th>Command</th><th>What it does</th></tr>
+    <tr><td><code>mkdir foldername</code></td><td>Create a new folder</td></tr>
+    <tr><td><code>cp file.txt copy.txt</code></td><td>Copy a file</td></tr>
+    <tr><td><code>mv file.txt ../file.txt</code></td><td>Move or rename a file</td></tr>
+    <tr><td><code>rm file.txt</code></td><td>Delete a file — <strong>no undo</strong></td></tr>
+  </table>
+</div>
+
+<!-- ── REQUIREMENTS.TXT ───────────────────────────────── -->
+<div class="section">
+  <h2>requirements.txt</h2>
+  <p>
+    A plain-text list of packages your project needs. Lives in the project root.
+    Run <code>pip install -r requirements.txt</code> to install everything at once.
+  </p>
+  <table>
+    <tr><th>Syntax</th><th>Meaning</th></tr>
+    <tr><td><code>pandas>=2.0</code></td><td>At least version 2.0 — installs latest compatible</td></tr>
+    <tr><td><code>pandas==2.0.1</code></td><td>Exactly this version — hard pin</td></tr>
+    <tr><td><code>pandas~=2.0</code></td><td>Compatible with 2.0 — allows patch updates (2.0.x)</td></tr>
+    <tr><td><code>pandas</code></td><td>No constraint — installs whatever is latest</td></tr>
+  </table>
+  <div class="note">
+    For learning projects, <code>&gt;=</code> is fine. For production or team projects, pin everything with <code>==</code> so everyone gets the exact same environment.
+  </div>
+</div>
+
+</body>
+</html>
